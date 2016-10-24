@@ -1,7 +1,4 @@
 package com.gas.framwork;
-
-import groovy.ui.SystemOutputInterceptor;
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.List;

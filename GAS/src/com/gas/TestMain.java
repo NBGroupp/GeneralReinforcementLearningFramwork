@@ -41,7 +41,7 @@ public class TestMain {
         agent_rl.initialize();
         agent_rl.runTrajectory(1000000);
 
-        value.printQV(); //
+        value.printQV();
 
 
     }

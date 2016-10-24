@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/GAS/GAS.iml" filepath="$PROJECT_DIR$/GAS/GAS.iml" />
       <module fileurl="file://$PROJECT_DIR$/GeneralReinfocementLearningFramwork.iml" filepath="$PROJECT_DIR$/GeneralReinfocementLearningFramwork.iml" />
     </modules>
   </component>
