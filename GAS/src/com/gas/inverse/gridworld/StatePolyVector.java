@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by Mao on 17/10/2016.
  */
-public class RewardVector {
+public class StatePolyVector {
     Map<String,Double> map ;
 
     public void print(){
@@ -17,7 +17,7 @@ public class RewardVector {
         }
         System.out.println();
     }
-    public RewardVector(State s) {
+    public StatePolyVector(State s) {
         double x = s.getFeature("x");
         double y = s.getFeature("y");
         map = new HashMap<String, Double>();
@@ -40,7 +40,14 @@ public class RewardVector {
             map.put(entry.getKey(),result);
         }
     }
-    public void add(RewardVector vector){
+    public double dotProduct(Map<String,Double> polyPara){
+        double result = 0;
+        for(String key : map.keySet()){
+            result = result + polyPara.get(key) * this.getFeature(key);
+        }
+        return result;
+    }
+    public void add(StatePolyVector vector){
         for(String key : map.keySet()){
             double result = vector.getFeature(key) + this.getFeature(key);
             map.put(key,result);

@@ -2,6 +2,7 @@ package com.gas;
 
 import com.gas.framwork.*;
 import com.gas.inverse.gridworld.*;
+import com.gas.inverse.gridworld.StatePolyVector;
 import com.gas.inverse.gridworld.actions.GoDownAction;
 import com.gas.inverse.gridworld.actions.GoLeftAction;
 import com.gas.inverse.gridworld.actions.GoRightAction;
@@ -14,7 +15,14 @@ import java.util.*;
  */
 public class TestMain {
 
+    private void rl(String rewardVector){
+       // String[] str_lst = rewardVector.
+       ////RewardFunc reward = new PolyRewardFunc();
+    }
     public static void main(String[] args){
+
+ /*
+
         RewardFunc reward = new GridRewardFunc();
         Logger log = new GridLogger("GridLogger");
         Environment env = new GridEnvironment();
@@ -25,13 +33,13 @@ public class TestMain {
         actions.put("down" ,  new GoDownAction  ("down",3));
         ExpertAgent expertAgent = new ExpertAgent(env,reward,log,actions);
 
-        /*
+
         expertAgent.initialize();
         List<List<State>> runHistory = expertAgent.runTrajectory(300);
         GridAnalyser analyser = new GridAnalyser(0.8);
-        RewardVector rv = analyser.preprocessing(runHistory);
+        Vector rv = analyser.preprocessing(runHistory);
         rv.print();
-        */
+
 
         GridValue value = new GridValue();
         double discount = 0.8;
@@ -43,6 +51,6 @@ public class TestMain {
 
         value.printQV();
 
-
+  */
     }
 }
