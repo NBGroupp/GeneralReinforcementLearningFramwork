@@ -12,10 +12,14 @@ public class StatePolyVector {
     Map<String,Double> map ;
 
     public void print(){
+        System.out.println(this.toString());
+    }
+    public  String toString(){
+        StringBuffer sb = new StringBuffer();
         for(String key : map.keySet()){
-            System.out.print("<"+key+":"+this.getFeature(key)+">");
+            sb.append("<"+key+":"+this.getFeature(key)+">");
         }
-        System.out.println();
+        return sb.toString();
     }
     public StatePolyVector(State s) {
         double x = s.getFeature("x");
