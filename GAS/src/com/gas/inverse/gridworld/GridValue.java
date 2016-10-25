@@ -37,7 +37,7 @@ public class GridValue implements Value {
             System.out.print("\n============action: "+i+" ===============\n");
             for(int j=0;j<4;j++ ){
                 for (int k=0;k<4;k++){
-                    System.out.print(valueMatrix[j][k][i] +" ");
+                    System.out.print(String.format("%.2f", valueMatrix[j][k][i]) + " ");
                 }
                 System.out.print("\n");
             }

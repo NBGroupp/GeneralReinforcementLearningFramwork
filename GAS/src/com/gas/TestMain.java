@@ -52,7 +52,7 @@ public class TestMain {
         GridAnalyser analyser = new GridAnalyser(discount);
         StatePolyVector rv = analyser.preprocessing(runHistory);
 
-
+        //value.printQV();
         return rv.toString();
     }
 
@@ -68,7 +68,7 @@ public class TestMain {
         ExpertAgent expertAgent = new ExpertAgent(env,reward,log,actions);
 
         expertAgent.initialize();
-        List<List<State>> runHistory = expertAgent.runTrajectory(1000000);
+        List<List<State>> runHistory = expertAgent.runTrajectory(100000);
         GridAnalyser analyser = new GridAnalyser(0.8);
         StatePolyVector rv = analyser.preprocessing(runHistory);
         return rv.toString();
@@ -76,11 +76,11 @@ public class TestMain {
     public static void main(String[] args){
         TestMain mainFunc = new TestMain();
         if(args[0].equals("expert")){
-            System.out.println("# expert is called!");
             String rs = mainFunc.expert();
             System.out.println(rs);
         }else if(args[0].equals("RL")){
-            mainFunc.reinforcementLearning(args[1]);
+            String rs = mainFunc.reinforcementLearning(args[1]);
+            System.out.println(rs);
         }else {
             System.out.println(" Error! input expert or RL");
         }
