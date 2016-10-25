@@ -11,6 +11,9 @@ import java.util.Map;
 public class StatePolyVector {
     Map<String,Double> map ;
 
+    public StatePolyVector(Map<String,Double> map){
+        this.map = map;
+    }
     public void print(){
         System.out.println(this.toString());
     }
@@ -46,6 +49,7 @@ public class StatePolyVector {
     }
     public double dotProduct(Map<String,Double> polyPara){
         double result = 0;
+        System.out.println( polyPara );
         for(String key : map.keySet()){
             result = result + polyPara.get(key) * this.getFeature(key);
         }

@@ -19,9 +19,9 @@ public class TestMain {
         paraStr = paraStr.replaceAll("><",",");
         paraStr = paraStr.replaceAll(">","");
         paraStr = paraStr.replaceAll("<","");
-
         StringTokenizer st=new StringTokenizer(paraStr, ",");
         while(st.hasMoreTokens()){
+
             String paraPair = st.nextToken();
             String key = paraPair.substring(0,paraPair.indexOf(":"));
             Double value = Double.parseDouble( paraPair.substring(paraPair.indexOf(":") +1,paraPair.length()) );
@@ -29,9 +29,9 @@ public class TestMain {
         }
         return paraMap;
     }
+
     private String reinforcementLearning(String rewardVector){
         Map<String,Double> para = paraStr2map(rewardVector);
-
         RewardFunc reward = new PolyRewardFunc(para);
 
         Environment env = new GridEnvironment();
@@ -48,11 +48,11 @@ public class TestMain {
         double epsilon = 0.8;
         GridRLAgent agent_rl = new GridRLAgent(env, reward, log, actions, value, discount,learn_rate,epsilon);
         agent_rl.initialize();
-        List<List<State>> runHistory = agent_rl.runTrajectory(10000);
+        List<List<State>> runHistory = agent_rl.runTrajectory(100000);
         GridAnalyser analyser = new GridAnalyser(discount);
         StatePolyVector rv = analyser.preprocessing(runHistory);
 
-        //value.printQV();
+
         return rv.toString();
     }
 
@@ -67,16 +67,22 @@ public class TestMain {
         actions.put("down" ,  new GoDownAction  ("down",3));
         ExpertAgent expertAgent = new ExpertAgent(env,reward,log,actions);
 
-
         expertAgent.initialize();
-        List<List<State>> runHistory = expertAgent.runTrajectory(300);
+        List<List<State>> runHistory = expertAgent.runTrajectory(1000000);
         GridAnalyser analyser = new GridAnalyser(0.8);
         StatePolyVector rv = analyser.preprocessing(runHistory);
-        //rv.print();
         return rv.toString();
     }
     public static void main(String[] args){
-        TestMain test = new TestMain();
-        test.reinforcementLearning("");
+        TestMain mainFunc = new TestMain();
+        if(args[0].equals("expert")){
+            System.out.println("# expert is called!");
+            String rs = mainFunc.expert();
+            System.out.println(rs);
+        }else if(args[0].equals("RL")){
+            mainFunc.reinforcementLearning(args[1]);
+        }else {
+            System.out.println(" Error! input expert or RL");
+        }
     }
 }

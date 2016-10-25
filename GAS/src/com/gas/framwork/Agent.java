@@ -47,15 +47,12 @@ public abstract class Agent {
         for(int i=0; i<times;i++){
             env.setAgentsState(id,initialize());
             Action action = null;
-            //System.out.println("x="+observe().getFeature("x")+"  y="+observe().getFeature("x"));
             while (!isEndState(observe())){
                 action = policy();
                 log.logTraj(observe().clone());
                 State state_before_act = observe().clone();
-               // System.out.println("x="+observe().getFeature("x")+"  y="+observe().getFeature("x")+"  "+action.getName());
                 action.act(this);
                 update(state_before_act , action);
-                //System.out.println("x="+observe().getFeature("x")+"  y="+observe().getFeature("x"));
             }
             log.logTraj(observe());
             log.newTraj();
