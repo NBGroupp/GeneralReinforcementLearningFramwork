@@ -14,19 +14,24 @@ import java.util.*;
  * Created by Mao on 12/10/2016.
  */
 public class TestMain {
+    private Map<String,Double> paraStr2map(String paraStr){
+        Map<String,Double> paraMap = new HashMap<String,Double>();
+        paraStr = paraStr.replaceAll("><",",");
+        paraStr = paraStr.replaceAll(">","");
+        paraStr = paraStr.replaceAll("<","");
 
+        StringTokenizer st=new StringTokenizer(paraStr, ",");
+        while(st.hasMoreTokens()){
+            String paraPair = st.nextToken();
+            String key = paraPair.substring(0,paraPair.indexOf(":"));
+            Double value = Double.parseDouble( paraPair.substring(paraPair.indexOf(":") +1,paraPair.length()) );
+            paraMap.put(key,value);
+        }
+        return paraMap;
+    }
     private String reinforcementLearning(String rewardVector){
-        Map<String,Double> para = new HashMap<String,Double>();
-        //需要一个  字符串——>map  个解析器 java Python两边实现，通过字符串传参数。
-        para.put("x",  0.1);
-        para.put("x2", 0.1);
-        para.put("x3", 0.1);
-        para.put("y",  0.1);
-        para.put("y2", 0.1);
-        para.put("y3", 0.1);
-        para.put("xy", 0.5);
-        para.put("x2y",0.5);
-        para.put("xy2",0.5);
+        Map<String,Double> para = paraStr2map(rewardVector);
+
         RewardFunc reward = new PolyRewardFunc(para);
 
         Environment env = new GridEnvironment();
