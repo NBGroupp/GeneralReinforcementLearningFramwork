@@ -75,6 +75,7 @@ public class TestMain {
     }
     public static void main(String[] args){
         TestMain mainFunc = new TestMain();
+
         if(args[0].equals("expert")){
             String rs = mainFunc.expert();
             System.out.println(rs);
@@ -84,5 +85,6 @@ public class TestMain {
         }else {
             System.out.println(" Error! input expert or RL");
         }
+
     }
 }
