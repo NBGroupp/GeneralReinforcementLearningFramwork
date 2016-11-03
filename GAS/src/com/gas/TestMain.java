@@ -21,7 +21,6 @@ public class TestMain {
         paraStr = paraStr.replaceAll("<","");
         StringTokenizer st=new StringTokenizer(paraStr, ",");
         while(st.hasMoreTokens()){
-
             String paraPair = st.nextToken();
             String key = paraPair.substring(0,paraPair.indexOf(":"));
             Double value = Double.parseDouble( paraPair.substring(paraPair.indexOf(":") +1,paraPair.length()) );
@@ -48,7 +47,7 @@ public class TestMain {
         double epsilon = 0.8;
         GridRLAgent agent_rl = new GridRLAgent(env, reward, log, actions, value, discount,learn_rate,epsilon);
         agent_rl.initialize();
-        List<List<State>> runHistory = agent_rl.runTrajectory(100000);
+        List<List<State>> runHistory = agent_rl.runTrajectory(10000);
         GridAnalyser analyser = new GridAnalyser(discount);
         StatePolyVector rv = analyser.preprocessing(runHistory);
 
@@ -57,7 +56,14 @@ public class TestMain {
     }
 
     public String expert (){
-        RewardFunc reward = new GridRewardFunc();
+
+
+        //RewardFunc reward = new GridRewardFunc();
+
+        Map<String,Double> para = paraStr2map("<xy2:0><xy:0><x:0><y:0><y2:0><x2:0><y3:0><x3:100><x2y:0>");
+        RewardFunc reward = new PolyRewardFunc(para);
+
+
         Logger log = new GridLogger("GridLogger");
         Environment env = new GridEnvironment();
         Map<String,Action> actions = new HashMap<String,Action>();
@@ -76,6 +82,27 @@ public class TestMain {
     public static void main(String[] args){
         TestMain mainFunc = new TestMain();
 
+        Map<String,Double> fMap = new HashMap<String,Double>();
+        Map<String,Double> polyMap = new HashMap<String,Double>();
+        fMap.put("1",1.0);
+        fMap.put("x",3.0);
+        fMap.put("y",2.0);
+        fMap.put("z",5.0);
+        PolynomialFeatures polynomialFeatures = new PolynomialFeatures(fMap,polyMap);
+
+        polynomialFeatures.fit(3);
+        for(String key : polyMap.keySet()){
+            System.out.println("<"+key + ":" + polyMap.get(key)+">");
+        }
+        System.out.println("polyMap.size() = " + polyMap.size());
+
+
+
+        /*
+        System.out.println(  mainFunc.reinforcementLearning("<xy2:1000><xy:0><x:0><y:0><y2:0><x2:0><y3:0><x3:0><x2y:0>")   );
+
+
+
         if(args[0].equals("expert")){
             String rs = mainFunc.expert();
             System.out.println(rs);
@@ -85,6 +112,8 @@ public class TestMain {
         }else {
             System.out.println(" Error! input expert or RL");
         }
+
+        */
 
     }
 }
